@@ -55,169 +55,330 @@ While the current implementation performs well, there are several areas for impr
 
 In the future, I plan to extend this work by incorporating alpha-beta pruning and iterative deepening to improve search efficiency. I am also interested in integrating opponent-aware evaluation and exploring learning-based approaches for tuning heuristics. A potential long-term direction is to combine this framework with Monte Carlo Tree Search to further enhance decision-making under uncertainty.
 
-## Below are the exact steps I followed to run this project from scratch on my laptop:
 
-# 1. Clone the Repository
+# 📂 Project Structure
 
-Open Command Prompt / Terminal and run:
+```bash
+AI-GAME-PLAYING-AGENT/
+│── agent.py
+│── student_agent.py
+│── gameEngine.py
+│── bot_client.py
+│── web_server.py
+│── start_server.sh
+│── requirements.txt
+│── README.md
+│── .gitignore
+```
 
-git clone <GITHUB_REPO_URL>
+---
+
+# 🚀 How to Run This Project
+
+## 1. Clone the Repository
+
+Open terminal / command prompt and run:
+
+```bash
+git clone <YOUR_GITHUB_REPO_URL>
 cd AI-GAME-PLAYING-BOT
+```
 
-This downloads the project and moves into the project directory.
+This downloads the project locally.
 
-# 2. Check Python Installation
+---
 
-This project requires Python 3.x.
+## 2. Check Python Installation
 
-Check installed version:
+This project requires **Python 3.x**.
 
+Check version:
+
+```bash
 python --version
+```
 
 or
 
+```bash
 python3 --version
+```
 
-Recommended:
+### Recommended Versions
+- Python 3.10
+- Python 3.11
+- Python 3.12
 
-Python 3.10 / 3.11 / 3.12
+### Avoid
+- Python 3.14+ (Pygame compatibility issues)
 
-Avoid:
-Python 3.14+ (causes pygame compatibility issues)
+---
 
-# 3. Create Virtual Environment
+## 3. Create Virtual Environment
 
-I created a virtual environment to isolate project dependencies.
+Create a local Python environment:
 
-Run:
-
+```bash
 python -m venv venv
+```
 
-This creates a local Python environment inside the project.
+---
 
-# 4. Activate Virtual Environment
-Windows CMD
+## 4. Activate Virtual Environment
+
+### Windows CMD
+
+```cmd
 venv\Scripts\activate
-Windows PowerShell
+```
+
+### Windows PowerShell
+
+```powershell
 .\venv\Scripts\Activate.ps1
-Mac / Linux
+```
+
+### Mac / Linux
+
+```bash
 source venv/bin/activate
+```
 
-If successful, terminal should show:
+If successful, terminal will show:
+
+```bash
 (venv)
+```
 
-# 5. Upgrade pip (Recommended)
+---
+
+## 5. Upgrade pip (Recommended)
+
+```bash
 python -m pip install --upgrade pip setuptools wheel
-This avoids package installation issues.
+```
 
-# 6. Install Dependencies
-Run:
+This helps avoid installation issues.
+
+---
+
+## 6. Install Dependencies
+
+```bash
 pip install -r requirements.txt
+```
 
 This installs:
 
-pygame
-flask
-flask-socketio
-requests
-numpy
-scipy
-python-socketio
+- pygame
+- flask
+- flask-socketio
+- python-socketio
+- requests
+- numpy
+- scipy
 
-# 7. Verify Installation
+---
 
-Check if major packages are installed:
+## 7. Verify Installation
+
+Check installed packages:
+
+```bash
 pip list
+```
 
-# 8. Run the Game Engine
+---
 
-This project supports multiple execution modes.
+# 🎮 Running the Project
 
-# Option A — AI vs AI (Recommended)
+---
 
-This is the easiest way to test the bot.
+## Option A – AI vs AI (Recommended)
 
-Run:
+This is the easiest way to test the AI.
 
+```bash
 python gameEngine.py --mode aivai --circle random --square student
+```
 
-Meaning:
-aivai → AI vs AI
-circle random → Circle player uses random agent
-square student → Square player uses my AI
+### Explanation:
+- `aivai` → AI vs AI
+- `circle random` → Circle uses random agent
+- `square student` → Square uses my AI agent
 
 This launches GUI mode.
 
-# Option B — AI vs AI (CLI / No GUI)
+---
 
-If GUI causes pygame/display issues:
+## Option B – AI vs AI (CLI / No GUI)
+
+If GUI causes issues:
+
+```bash
 python gameEngine.py --mode aivai --circle random --square student --nogui
+```
 
-Runs in terminal only.
+Runs inside terminal.
 
-# Option C — Human vs AI
+---
+
+## Option C – Human vs AI
 
 To manually play against the AI:
 
+```bash
 python gameEngine.py --mode hvai
+```
 
-This starts Human vs AI.
+Starts Human vs AI mode.
 
-# 9. Run AI on Opposite Side (Testing Symmetry)
+---
 
-To test whether my agent behaves correctly as Circle:
+## Option D – Test AI on Opposite Side
+
+To validate side symmetry:
+
+```bash
 python gameEngine.py --mode aivai --circle student --square random
+```
 
-Useful for validating side-specific heuristics.
+This helps check if heuristics behave correctly for both players.
 
-# 10. Run Self-Play (AI vs AI)
+---
 
-To test my AI against itself:
+## Option E – Self Play (AI vs AI)
+
+To run AI against itself:
+
+```bash
 python gameEngine.py --mode aivai --circle student --square student
+```
 
-This helps verify:
-stability
-legal moves
-river behavior
-scoring logic
-strategic consistency
+Useful for checking:
+- stability
+- legal moves
+- scoring
+- river mechanics
+- long-term strategy
 
-# 11. Run Different Board Sizes
+---
+
+## Option F – Different Board Sizes
 
 Supported sizes:
-small
-medium
-large
+- small
+- medium
+- large
 
 Example:
+
+```bash
 python gameEngine.py --mode aivai --board-size medium
+```
 
-# 12. Run Full Web-Based System (Optional)
+---
 
-This project also supports a distributed setup.
-Start Server:
+# 🌐 Running Full Web-Based System (Optional)
 
-Mac/Linux/Git Bash:
+This project also supports a distributed architecture.
 
+---
+
+## 1. Start Server
+
+### Mac/Linux/Git Bash
+
+```bash
 bash start_server.sh 8080
+```
 
-Windows CMD:
+### Windows CMD
 
+```cmd
 python web_server.py 8080
-Start Bot Clients
+```
 
-Open 2 terminals.
+---
 
-Terminal 1
+## 2. Start Bot Clients
+
+Open **two terminals**.
+
+### Terminal 1
+
+```bash
 python bot_client.py circle 8080 --strategy student
-Terminal 2
+```
+
+### Terminal 2
+
+```bash
 python bot_client.py square 8080 --strategy student
-Open Browser
+```
+
+---
+
+## 3. Open Browser
 
 Visit:
-http://localhost:8080
 
-Then create/start game.
+```bash
+http://localhost:8080
+```
+
+Create and start game.
+
+---
+
+# 🧠 AI Strategy Used
+
+My AI agent is built using:
+
+### 1. Minimax Algorithm
+Models the game as an adversarial search problem.
+
+### 2. Alpha-Beta Pruning
+Reduces unnecessary search branches.
+
+### 3. Heuristic Evaluation
+Board evaluation based on:
+- scoring control
+- positional advantage
+- reachability
+- opponent blocking
+- tactical opportunities
+
+### 4. Selective Move Generation
+Prioritizes strong moves before searching.
+
+---
+
+# 🔥 Main Command I Used
+
+```bash
+python gameEngine.py --mode aivai --circle random --square student
+```
+
+This was my primary testing command to compare my AI against the random baseline.
+
+---
+
+# 📚 Learning Outcomes
+
+This project helped me understand:
+
+- Adversarial Search
+- Minimax
+- Alpha-Beta Pruning
+- Heuristic Evaluation
+- Game Tree Optimization
+- AI Agent Design
+- Simulation Engines
+- Distributed System Interaction
+- Real-Time Decision Making
+
+---
 
 ## Conclusion
 
