@@ -49,12 +49,6 @@ Another important choice was to incorporate heavy domain-specific heuristics. Th
 
 The resulting agent demonstrates strong domain awareness and is able to make efficient decisions under tight time constraints. It prioritizes offensive opportunities effectively while maintaining a reasonable level of defensive awareness. The use of heuristic pruning significantly reduces the search space, allowing the agent to focus on moves that are most likely to impact the outcome of the game.
 
-## Limitations & Future Improvements
-
-While the current implementation performs well, there are several areas for improvement. The search depth is fixed and does not adapt based on the game state or available time. The absence of alpha-beta pruning means that some unnecessary branches are still explored. Additionally, the agent does not explicitly model opponent behavior, which limits its ability to anticipate and counter advanced strategies.
-
-In the future, I plan to extend this work by incorporating alpha-beta pruning and iterative deepening to improve search efficiency. I am also interested in integrating opponent-aware evaluation and exploring learning-based approaches for tuning heuristics. A potential long-term direction is to combine this framework with Monte Carlo Tree Search to further enhance decision-making under uncertainty.
-
 
 # 📂 Project Structure
 
